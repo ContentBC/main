@@ -33,14 +33,70 @@
            </div>
        </nav>
 
-       <div class="text-align:center;" style="padding:40px;">
-         <h3>建设中...，敬请等待！</h3>
+       <div class="panel panel-info">
+         <div class="panel-heading"><h3>字符转Base64</h3></div>
+         <div class="panel-body">
+           <div class="col-lg-5">
+             <label for="input">文本信息:</label><br/>
+             <textarea id="base64Text" name="input" style="width: 100%" rows="2">www.ContentBC.com</textarea>
+           </div>
+           <div class="col-lg-2">
+             <label>&nbsp;</label><br/>
+             <button id="base64Execute" class="btn btn-primary">转为Base64</button>
+           </div>
+           <div class="col-lg-5">
+             <label for="input">Base64:</label><br/>
+             <textarea id="base64String" name="sha512Crypted" style="width: 100%" rows="2"></textarea>
+           </div>
+         </div>
        </div>
+
+       <div class="panel panel-info">
+         <div class="panel-heading"><h3>Base64转字符</h3></div>
+         <div class="panel-body">
+           <div class="col-lg-5">
+             <label for="input">Base64:</label><br/>
+             <textarea id="baseStrText" name="input" style="width: 100%" rows="2"></textarea>
+           </div>
+           <div class="col-lg-2">
+             <label>&nbsp;</label><br/>
+             <button id="baseStrExecute" class="btn btn-primary">转为Base64</button>
+           </div>
+           <div class="col-lg-5">
+             <label for="input">文本信息:</label><br/>
+             <textarea id="baseStrString" name="sha512Crypted" style="width: 100%" rows="2"></textarea>
+           </div>
+         </div>
+       </div>
+
     </div>
 
 
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
+
+    <script src="rollups/core-min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="rollups/enc-base64-min.js" type="text/javascript" charset="utf-8"></script>
+
+    <script type="text/javascript">
+      $("#base64Execute").click(function(){
+        var text = $("#base64Text").val();
+        var str = CryptoJS.enc.Utf8.parse(text);
+        var base64 = CryptoJS.enc.Base64.stringify(str);
+        $("#base64String").val(base64);
+        $("#baseStrText").val(base64);
+      });
+    </script>
+
+    <script type="text/javascript">
+      $("#baseStrExecute").click(function(){
+        var text = $("#baseStrText").val();
+        var words = CryptoJS.enc.Base64.parse(text);
+        var parseStr = words.toString(CryptoJS.enc.Utf8);
+        $("#baseStrString").val(parseStr);
+      });
+    </script>
+
 
   </body>
 </html>
