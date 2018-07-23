@@ -34,7 +34,7 @@
        </nav>
 
        <div class="panel panel-info">
-         <div class="panel-heading"><h3>字符转Base64</h3></div>
+         <div class="panel-heading"><h3>Base64编码</h3></div>
          <div class="panel-body">
            <div class="col-lg-5">
              <label for="input">文本信息:</label><br/>
@@ -42,17 +42,17 @@
            </div>
            <div class="col-lg-2">
              <label>&nbsp;</label><br/>
-             <button id="base64Execute" class="btn btn-primary">转为Base64</button>
+             <button id="base64Execute" class="btn btn-primary">编码</button>
            </div>
            <div class="col-lg-5">
              <label for="input">Base64:</label><br/>
-             <textarea id="base64String" name="sha512Crypted" style="width: 100%" rows="2"></textarea>
+             <textarea id="base64String" name="output" style="width: 100%" rows="2"></textarea>
            </div>
          </div>
        </div>
 
        <div class="panel panel-info">
-         <div class="panel-heading"><h3>Base64转字符</h3></div>
+         <div class="panel-heading"><h3>Base64解码</h3></div>
          <div class="panel-body">
            <div class="col-lg-5">
              <label for="input">Base64:</label><br/>
@@ -60,14 +60,52 @@
            </div>
            <div class="col-lg-2">
              <label>&nbsp;</label><br/>
-             <button id="baseStrExecute" class="btn btn-primary">转为Base64</button>
+             <button id="baseStrExecute" class="btn btn-primary">解码</button>
            </div>
            <div class="col-lg-5">
              <label for="input">文本信息:</label><br/>
-             <textarea id="baseStrString" name="sha512Crypted" style="width: 100%" rows="2"></textarea>
+             <textarea id="baseStrString" name="output" style="width: 100%" rows="2"></textarea>
+           </div>
+         </div>
+
+
+       </div>
+
+
+       <div class="panel panel-info">
+         <div class="panel-heading"><h3>Base58编码</h3></div>
+         <div class="panel-body">
+           <div class="col-lg-5">
+             <label for="input">文本信息:</label><br/>
+             <textarea id="base58Text" name="input" style="width: 100%" rows="2">www.ContentBC.com</textarea>
+           </div>
+           <div class="col-lg-2">
+             <label>&nbsp;</label><br/>
+             <button id="base58Execute" class="btn btn-primary">编码</button>
+           </div>
+           <div class="col-lg-5">
+             <label for="input">Base58:</label><br/>
+             <textarea id="base58String" name="output" style="width: 100%" rows="2"></textarea>
            </div>
          </div>
        </div>
+
+       <div class="panel panel-info">
+         <div class="panel-heading"><h3>Base58解码</h3></div>
+         <div class="panel-body">
+           <div class="col-lg-5">
+             <label for="input">Base58:</label><br/>
+             <textarea id="base58StrText" name="input" style="width: 100%" rows="2"></textarea>
+           </div>
+           <div class="col-lg-2">
+             <label>&nbsp;</label><br/>
+             <button id="base58StrExecute" class="btn btn-primary">解码</button>
+           </div>
+           <div class="col-lg-5">
+             <label for="input">文本信息:</label><br/>
+             <textarea id="base58StrString" name="output" style="width: 100%" rows="2"></textarea>
+           </div>
+         </div>
 
     </div>
 
@@ -88,12 +126,37 @@
       });
     </script>
 
+
     <script type="text/javascript">
       $("#baseStrExecute").click(function(){
         var text = $("#baseStrText").val();
         var words = CryptoJS.enc.Base64.parse(text);
         var parseStr = words.toString(CryptoJS.enc.Utf8);
         $("#baseStrString").val(parseStr);
+      });
+    </script>
+
+    <script src="js/basex.js"></script>
+    <script src="js/base58.js"></script>
+
+    <script type="text/javascript">
+      $("#base58Execute").click(function(){
+        var text = $("#base58Text").val();
+        var base58 = Base58.encode(text);
+        $("#base58String").val(base58);
+        $("#base58StrText").val(base58);
+        // var str = CryptoJS.enc.Utf8.parse(text);
+        // var base64 = CryptoJS.enc.Base64.stringify(str);
+        // $("#base64String").val(base64);
+        // $("#baseStrText").val(base64);
+      });
+    </script>
+
+    <script type="text/javascript">
+      $("#base58StrExecute").click(function(){
+        var text = $("#base58StrText").val();
+        parseStr = Base58.decode(text);
+        $("#base58StrString").val(parseStr);
       });
     </script>
 
