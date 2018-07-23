@@ -4,6 +4,9 @@
     <meta charset="utf-8">
     <title></title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/isotope.css" />
+    <link rel="stylesheet" href="css/da-slider.css" />
   </head>
   <body>
 
@@ -35,7 +38,7 @@
            <div class="panel-heading"><h1>在线 RSA Key 生成器</h1></div>
            <div class="panel-body">
              <div class="row col-lg-12">
-               <div class="well">
+               <!-- <div class="well"> -->
                  <!-- <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> -->
                  <!-- frontpage banner -->
                  <!-- <ins class="adsbygoogle"
@@ -45,9 +48,9 @@
                  <script>
                    (adsbygoogle = window.adsbygoogle || []).push({});
                  </script> -->
-                <h4>RSA加密算法是一种非对称加密算法。在公开密钥加密和电子商业中RSA被广泛使用。RSA是1977年由罗纳德·李维斯特（Ron Rivest）、阿迪·萨莫尔（Adi Shamir）和伦纳德·阿德曼（Leonard Adleman）一起提出的。当时他们三人都在麻省理工学院工作。RSA就是他们三人姓氏开头字母拼在一起组成的。
-                </h4>
-               </div>
+                <!-- <h4>RSA加密算法是一种非对称加密算法。在公开密钥加密和电子商业中RSA被广泛使用。RSA是1977年由罗纳德·李维斯特（Ron Rivest）、阿迪·萨莫尔（Adi Shamir）和伦纳德·阿德曼（Leonard Adleman）一起提出的。当时他们三人都在麻省理工学院工作。RSA就是他们三人姓氏开头字母拼在一起组成的。 -->
+                <!-- </h4> -->
+               <!-- </div> -->
              </div>
              <div class="col-lg-2">
                <div class="btn-group">
@@ -90,7 +93,7 @@
 
        <div class="row">
          <div class="panel panel-default">
-           <div class="panel-heading"><h3>RSA Encryption Test</h3></div>
+           <div class="panel-heading"><h3>RSA 加／解密测试</h3></div>
            <div class="panel-body">
              <div class="col-lg-5">
                <label for="input">Text to encrypt:</label><br/>
@@ -98,7 +101,10 @@
              </div>
              <div class="col-lg-2">
                <label>&nbsp;</label><br/>
-               <button id="execute" class="btn btn-primary">Encrypt / Decrypt</button>
+               <button id="execute" class="btn btn-primary">公钥加密</button>
+               <br>
+               <label>&nbsp;</label><br/>
+               <button id="executeDec" class="btn btn-primary">私钥解密</button>
              </div>
              <div class="col-lg-5">
                <label for="crypted">Encrypted:</label><br/>
@@ -128,6 +134,14 @@
           });
         });
 
+        $('#executeDec').click(function () {
+
+          var crypt = new JSEncrypt();
+          crypt.setPrivateKey($('#privkey').val());
+          var decrypted = crypt.decrypt($('#crypted').val());
+          alert("私钥解密结果："+decrypted);
+        });
+
         // Execute when they click the button.
         $('#execute').click(function () {
 
@@ -146,19 +160,19 @@
           // Get the input and crypted values.
           var input = $('#input').val();
           var crypted = $('#crypted').val();
-
+          $('#crypted').val(crypt.encrypt(input));
           // Alternate the values.
-          if (input) {
-            $('#crypted').val(crypt.encrypt(input));
-            $('#input').val('');
-          }
-          else if (crypted) {
-            var decrypted = crypt.decrypt(crypted);
-            if (!decrypted)
-              decrypted = 'This is a test!';
-            $('#input').val(decrypted);
-            $('#crypted').val('');
-          }
+          // if (input) {
+          //   $('#crypted').val(crypt.encrypt(input));
+          //   $('#input').val('');
+          // }
+          // else if (crypted) {
+          //   var decrypted = crypt.decrypt(crypted);
+          //   if (!decrypted)
+          //     decrypted = 'This is a test!';
+          //   $('#input').val(decrypted);
+          //   $('#crypted').val('');
+          // }
         });
 
         var generateKeys = function () {

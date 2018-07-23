@@ -3,7 +3,10 @@
   <head>
     <meta charset="utf-8">
     <title></title>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <!-- <link rel="stylesheet" href="css/isotope.css" /> -->
+    <!-- <link rel="stylesheet" href="css/da-slider.css" /> -->
   </head>
   <body>
 
@@ -29,11 +32,1096 @@
                </ul>
            </div>
        </nav>
+
+       <!-- <div class="panel panel-default"> -->
+       <ul id="myTab" class="nav nav-pills">
+       	<li class="active"><a href="#hash" data-toggle="tab">
+       		<h4>哈希算法</h4></a></li>
+       	<li><a href="#rsa" data-toggle="tab"><h4>非对称加密</h4></a></li>
+        <li><a href="#digest" data-toggle="tab"><h4>数字签名</h4></a></li>
+        <li><a href="#base64" data-toggle="tab"><h4>字符编／解码</h4></a></li>
+       </ul>
+     <!-- </div> -->
+
+       <div id="myTabContent" class="tab-content">
+
+       	<div class="tab-pane fade in active" id="hash">
+           <!-- <section class="secPad"> -->
+           <br>
+          <ul class="list-unstyled">
+            <li><a href="#define"><h4>（一）哈希的定义</h4></a></li>
+            <li><a href="#algorithm"><h4>（二）流行的算法</a></li>
+            <li><a href="#compare"><h4>（三）哈希与加／解密的区别</a></li>
+          </ul>
+
+        <!-- </section> -->
+          
+          <section id="define" class="secPad white">
+            <div class="container">
+              <row>
+              <div class="heading text-center">
+                  <!-- Heading -->
+                  <h2>（一）哈希的定义</h2>
+                  <div  class="text-left col-lg-12">
+                  <p style="padding-top:20px; font-size:20px; line-height:30px;">
+                  1）Hash（哈希或散列）算法是信息技术领域非常基础和非常重要的技术。
+                  它将任意长度的二进制制（明文）映射为较端的固定长度的二进制值（Hash值），
+                  并且不同的明文很难映射为相同的Hash值。Hash值在应用中又被称为指纹（fingerprint）、摘要（digest）。
+
+                     </p>
+                  </div>
+            </div>
+
+            <div class="text-left col-lg-12">
+            <ul type="disc" style="font-size: 18px;padding-left:40px; padding-top: 0;line-height:30px;">
+              <li>
+              <p>  例如计算一段文字“hello blockchain”的MD5 Hash值为：78e6a8bcdef7a4a254c16054b082c783</p>
+              </li>
+
+              <li>
+              <p>  这意味着我们只有对某文件进行MD5 Hash计算，得到结果为78e6a8bcdef7a4a254c16054b082c783，
+                就说明文件内容极大概率上就是“hello blockchain”。可见，Hash的核心思想非常类似于内容的编址或命名。
+              </li>
+
+            </ul>
+          </div>
+
+          <div class="text-left col-lg-12" >
+            <p style="padding-top:20px; font-size:20px; line-height:30px;">
+              2）一个优秀的Hash算法，将能实现：
+            </p>
+
+          </div>
+
+          <div class="text-left col-lg-12" >
+            <ul type="disc" style="font-size: 18px;padding-left:40px; padding-top: 0;line-height:30px;">
+            <li>
+            <p>
+              正向快速：给定明文和Hash算法，在有限时间和有限资源内能计算初Hash值。
+            </p>
+            </li>
+
+            <li>
+              <p>
+                逆向困难：给定Hash值，在有限时间内很难（基本不可能）逆推出明文。
+              </p>
+            </li>
+
+            <li>
+              <p>
+                输入敏感：原始输入信息修改一点信息，产生的Hash值看起来应该有很大不同。
+              </p>
+            </li>
+
+            <li>
+              <p>
+                抗冲突：
+              </p>
+              <!-- <div class="text-left" style="padding-top:0;"> -->
+              <ul class="col-lg-12 " type="circle" style="padding-left:40px; padding-top:0;line-height:30px;">
+                <li>
+                  <p>
+                    对不同的关键字可能得到同一散列地址，或者说两段内容不同的明文，
+                    它们的Hash值可能是一样的。这种现象称为冲突或碰撞。具有相同函数值的
+                    关键字对该散列函数来说称做同义词。
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    抗冲突又称为“抗碰撞性”或冲突避免。哈希函数抗冲突指得就是不同输入不能产生相同的输出。
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    抗冲突并不是不会有冲突，而是找到有冲突的两个输入的代价非常大。就如同暴力破解一个
+                    有效期为20年的密码，整个破解过程或许长达30年。这样即使最后密码被破解了，但是也失去意义了。
+                  </p>
+                </li>
+
+              </ul>
+            </li>
+
+          </ul>
+
+
+          </div>
+        </row>
+          </div>
+          </section>
+
+          <section id="algorithm" class="secPad">
+            <div class="container">
+              <div class="heading text-center">
+                  <!-- Heading -->
+                  <h2>（二）流行的算法</h2>
+                  <div  class="text-left col-lg-12">
+                  <p style="padding-top:20px; font-size:20px; line-height:30px;">
+                    目前流行的 Hash 算法包括 MD5、SHA-1 和 SHA-2（SHA-224、SHA-256、SHA-384和SHA-512）。
+
+                     </p>
+                  </div>
+                  <div class="text-left col-lg-12" >
+                    <ol  style="padding-left:40px; padding-top: 0;line-height:30px;">
+                    <li>
+                      <h4>MD4</h4>
+                    </li>
+                    <ul type="disc" style="padding-left:40px;">
+                      <li>
+                    <p>
+                      MD4（RFC 1320）是 MIT 的 Ronald L. Rivest 在 1990 年设计的，MD 是 Message Digest 的缩写。其输出为 128 位。MD4 已证明不够安全。
+                    </p>
+                    </li>
+                  </ul>
+
+                  <li>
+                    <h4>MD5</h4>
+                  </li>
+                  <ul type="disc" style="padding-left:40px;">
+                    <li>
+                      <p>
+                        MD5（RFC 1321）即Message-Digest Algorithm 5（信息-摘要算法 5）是 Rivest 于1991年对 MD4 的改进版本。它对输入仍以 512 位分组，其输出是 128 位。MD5 比 MD4 复杂，并且计算速度要慢一点，更安全一些。MD5 已被证明不具备”强抗碰撞性”。
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                      MD5用于确保信息传输完整一致。是计算机广泛使用的散列算法之一（又译摘要算法、哈希算法），主流编程语言普遍已有MD5实现。 将数据（如汉字）运算为另一固定长度值，是散列算法的基础原理，MD5的前身有MD2、MD3和MD4。
+                      </p>
+                    </li>
+
+                    <li>
+                      <p>
+                        MD5是输入不定长度信息，输出固定长度128-bits的算法。经过程序流程，生成四个32位数据，最后联合起来成为一个128-bits散列。基本方式为，求余、取余、调整长度、与链接变量进行循环运算。得出结果。
+                      </p>
+                    </li>
+
+                  </ul>
+
+                  <li>
+                    <h4>SHA</h4>
+                  </li>
+
+                  <ul type="disc" style="padding-left:40px;">
+                    <li>
+                      <p>
+                        SHA （Secure Hash Algorithm）是一个 Hash 函数族，由 NIST（National Institute of Standards and Technology）于 1993 年发布第一个算法。目前知名的 SHA-1 在 1995 年面世，
+                        它的输出为长度 160 位的 hash 值，因此抗穷举性更好。
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        SHA-1 设计时基于和 MD4 相同原理，并且模仿了该算法。SHA-1 已被证明不具”强抗碰撞性”。
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        为了提高安全性，NIST 还设计出了 SHA-224、SHA-256、SHA-384，和 SHA-512 算法（统称为 SHA-2），跟 SHA-1 算法原理类似。SHA-3 相关算法也已被提出。
+                      </p>
+                       </li>
+                   <li>
+                     <p>
+                       目前，一般认为MD5和SHA1已经不够安全，推荐至少使用SHA-256算法。
+                     </p>
+                  </li>
+
+                  </ul>
+
+                  <li>
+                    <h4>RIPEMD-160</h4>
+                  </li>
+                  <ul type="disc" style="padding-left:40px;">
+                    <li>
+                      <p>
+                        RIPEMD-160：RACE Integrity Primitives Evaluation Message Digest 160，
+                        RACE完整的原始评估信息摘要。
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        RIPEMD-160是一个160位的加密哈希函数，皆在替代128位哈希函数MD4、MD5.
+                      </p>
+                    </li>
+                    </ul>
+
+                    <li>
+                      <h4>各种Hash算法计算后的长度</h4>
+                    </li>
+                    <ul type="disc" style="padding-left:40px;">
+                      <li>
+                        <p>
+                          MD5('www.ContentBC.com')，128位长度
+                        </p>
+                      </li>
+
+
+                      <ul type="circle" style="padding-left:40px">
+                        <li>
+                          8596ec1470c0e91ca4e9df31a8ef9ecd // 32位 16进制数字
+                        </li>
+                      </ul>
+
+
+                      <li>
+                        <p>
+                          RIPEMD-160('www.ContentBC.com')，160位长度
+                        </p>
+                      </li>
+                      <ul type="circle" style="padding-left:40px">
+                        <li>
+                          ad455be3d61ba120d506f88175c6d1a3f00548f8 // 40位 16进制数字
+                        </li>
+                      </ul>
+
+                      <li>
+                        <p>
+                          SHA256('www.ContentBC.com')，256位长度
+                        </p>
+                      </li>
+                      <ul type="circle" style="padding-left:40px">
+                        <li>
+                          9f10abd60d3e88158e4278224d32453164314b9235056391f000d2e44a7ba0fd // 64位 16进制数字
+                        </li>
+                      </ul>
+
+                      <li>
+                        <p>
+                          SHA512('www.ContentBC.com')，512位长度
+                        </p>
+                      </li>
+                      <ul type="circle" style="padding-left:40px">
+                        <li>
+                          58233ab093d6cdf7edede22aa03634397bb43d5bb25c143c4b8c91b7ba93dd791a4b8d0a86c40f792331ce103851e04183df034572066d734950a6ba906eb6f7 // 128位 16进制数字
+                        </li>
+                      </ul>
+
+                      </ul>
+
+                  </ol>
+                </div>
+
+
+                </div>
+              </div>
+          </section>
+
+          <section id="compare" class="secPad white">
+            <div class="container">
+              <div class="heading text-center">
+                  <!-- Heading -->
+                  <h2>（三）哈希与加／解密的区别</h2>
+
+                  <div class="text-left col-lg-12" >
+                    <ol  style="padding-left:40px; padding-top: 0;line-height:30px;">
+                    <li>
+                      <h4>哈希（Hash）与加密（Encrypt）的区别</h4>
+                    </li>
+
+                    <ul type="disc" style="padding-left:40px;">
+                      <li>
+                        <p>
+                          这两个概念不是很清晰，容易混淆两者。而正确区别两者是正确选择和使用哈希与加密的基础。
+                        </p>
+                      </li>
+
+                      <li>
+                        <p>哈希（Hash）是将目标文本转换成具有相同长度的、不可逆的杂凑字符串（或叫消息摘要）。
+                        而加密算法（Encrypt）是将目标文本转换成具有不同长度的、可逆的密文。</p>
+                      </li>
+
+                      <ul type="circle" style="padding-left:40px;">
+                        <li>
+                          <p>
+                            哈希算法往往被设计成生成具有相同长度的文本，而加密算法生成的文本长度与明文本身的
+                            长度有关。
+                          </p>
+                        </li>
+
+                        <ul style="padding-left:40px;">
+                          <li>
+                            <p>
+                              哈希的结果具有相同的长度，而加密的结果则长度不同。实际上，如果使用相同的哈希算法，
+                              无论你的输入多么长，得到的结果都是一样的，而加密算法往往与明文长度成正比。
+
+                            </p>
+                          </li>
+                        </ul>
+
+                        <li>
+                          <p>
+                            哈希算法是不可逆的，而加密算法是可逆的。
+                          </p>
+                        </li>
+
+                        <ul style="padding-left:40px;">
+                          <li>
+                            <p>
+                              哈希不是一一映射，是不可逆的。而加密算法是一一映射，是可逆的。
+                            </p>
+                          </li>
+                          <li>
+                            <p>
+                              哈希是不可能可逆的，因为如果可逆，那么哈希就是世界上最强悍的压缩
+                              方式了，它能将任意大小的文件压缩成固定大小。
+                            </p>
+                          </li>
+                        </ul>
+
+
+                      </ul>
+                      <li>
+                        <p>下图显示哈希与加密的区别：</p>
+                      </li>
+
+                      <div style="text-align: center;">
+                        <img src="./img/hash_diff.png" alt="hash_encrypt" style="margin: 0 auto; width:600px;">
+                      </div>
+
+
+                    </ul>
+
+                    <li>
+                      <h4>哈希（Hash）与加密（Encrypt）的选择</h4>
+                    </li>
+
+                    <ul type="disc" style="padding-left:40px;">
+                      <li>
+                        <p>
+                          要实现数据保护，可以选择使用哈希或加密两种方式，那么什么时候该
+                          选择哈希，什么时候该选择加密呢？
+                        </p>
+                      </li>
+                      <li>
+                        <p>
+                          基本原则是：
+                        </p>
+                      </li>
+
+                      <ul type="circle" style="padding-left:40px;">
+                        <li>
+                          <p>
+                            如果被保护数据仅仅用作比较验证，在以后不需要还原成明文形式，则使用哈希。
+                          </p>
+                        </li>
+                        <li>
+                          <p>
+                            如果被保护数据在以后需要被还原成明文，则需要使用加密。
+                          </p>
+                        </li>
+                        <li>
+                          <p>
+                            例如，你正在做一个系统，打算当用户忘记自己的登录口令时，
+                            重置该用户的口令为一个随机口令，而后将此随机口令发给用户，
+                            让用户下次使用此口令登录，则适合使用哈希。
+                          </p>
+                        </li>
+                        <li>
+                          <p>
+                            相反，如果你做的系统要求在用户忘记口令的时候必须将原口令发送给
+                            用户，而不是重置口令时，则必须选择加密而不是哈希。
+                          </p>
+                        </li>
+
+                      </ul>
+
+                    </ul>
+                    <div style="text-align: center;">
+                      <img src="./img/select.png" alt="hash_encrypt" style="margin: 0 auto; width:600px;">
+                    </div>
+
+
+                    <li>
+                      <h4>对简单哈希（Hash）的攻击</h4>
+                    </li>
+
+                    <ul type="disc" style="padding-left:40px;">
+                      <li>
+                        <p>
+                          对于哈希的攻击，主要有寻找碰撞法和穷举法。
+                        </p>
+                      </li>
+                      <li>
+                        <p>
+                          寻找碰撞法
+                        </p>
+                      </li>
+
+                      <ul type="circle" style="padding-left:40px;">
+                        <li>
+                          <p>
+                            目前对于MD5和SHA1并不存在有效的寻找碰撞方法。
+                          </p>
+                        </li>
+                        <li>
+                          <p>
+                            中国数学家王小云教授曾经在国际密码学会上发表了
+                            对于MD5和SHA1的碰撞寻找改进算法，但是这种方法和
+                            “破解”相去甚远。该理论目前仅具有数学上的意义，它
+                            将破解MD5的预期步骤降低了好几个数量级，但对于实际
+                            应用来说仍然是一个天文数字。
+                          </p>
+                        </li>
+                      </ul>
+                      <div style="text-align: center;">
+                        <img src="./img/attack.png" alt="hash_encrypt" style="margin: 0 auto; width:800px;">
+                      </div>
+
+                      <li>
+                        <p>
+                          穷举法（或暴力破解法）
+                        </p>
+                      </li>
+                      <ul type="circle" style="padding-left:40px;">
+                        <li>
+                          <p>
+                            通俗来说，就是在一个范围内，如从000000到999999，将其中
+                            所有值一个一个用哈希算法进行哈希，然后将结果和杂凑串进行比较，
+                            如果相同，则这个值就一定是源字串的一个碰撞，于是就可以将这个
+                            值非法登录了。
+                          </p>
+                        </li>
+                        <li>
+                          <p>
+                            穷举法看似笨拙，但目前所有的MD5破解机或MD5在线破解都是用这种穷举法。
+                          </p>
+                        </li>
+                        <li>
+                          <p>
+                            纠其缘由，就是相当一部分口令是非常简单的，如“123456”或 “000000”.
+                            穷举法是否能成功很大程度上取决于口令的复杂性。因为穷举法扫描的区间
+                            往往是单字符集、规则的区间，或者由字典数据进行组合。因此，如果使用
+                            复杂的口令，例如：“!@#$%*()”这种口令，穷举法是很难奏效的。
+                          </p>
+                        </li>
+                      </ul>
+                    </ul>
+
+                  </ol>
+                </div>
+
+
+          </div>
+          </section>
+
+       	</div>
+       	<div class="tab-pane fade" id="rsa">
+          <ul class="list-unstyled" style="font-size: 18px; padding-left:40px;line-height:30px;">
+            <li>
+              <p>
+                <h4>（一）、发展史</h4>
+              </p>
+            </li>
+
+            <ol style="padding-left:40px;">
+              <li>
+                <p>
+                  该思想最早由瑞夫-墨克（Ralph C.Merkle）在1974年提出，之后在1976年，惠特菲尔德-迪菲（Whitfield Diffie）与
+                    马丁-赫尔曼（Martin Hellman）两位斯坦福的学者以单向函数为基础，创建了DH密码交换算法。
+                </p>
+              </li>
+              <li>
+                <p>
+                  RSA是1977年由罗纳德·李维斯特（Ron Rivest）、阿迪·萨莫尔（Adi Shamir）和伦纳德·阿德曼（Leonard Adleman）一起提出的。
+                  当时他们三人都在麻省理工学院工作。RSA就是他们三人姓氏开头字母拼在一起组成的。
+                </p>
+              </li>
+              <li>
+                <p>
+                  其它常见的公钥加密算法有：EIGamal、背包算法、Rabin（RSA的特例）、椭圆曲线加密算法（Elliptic Curve Cryptography，ECC）。
+                </p>
+              </li>
+            </ol>
+
+            <li>
+              <p>
+                <h4>（二）、非对称加密（Asymmetric Cryptography）</h4>
+              </p>
+            </li>
+            <ol style="padding-left:40px;">
+              <li>
+                <p>
+                  非对称加密又叫做公开密钥加密（Public key cryptography）或公钥加密。
+                </p>
+              </li>
+              <li>
+                <p>
+                  公钥加密，需要两个密钥，一个是公开密钥，另一个是私有密钥；一个用于加密使用，另一个则用作解密使用。
+                </p>
+
+              </li>
+              <ul type="disc" style="padding-left:40px;">
+                <li>
+                  <p>
+                    使用其中一个密钥把明文加密后所得的密文，只能用相对应的另一个密钥才能解密得到原本的明文；甚至连最初用于
+                    加密的密钥也不能用作解密。由于加密和解密需要两个不同的密钥，故被称为非对称加密。
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    不同于加密和解密都使用同一个密钥的对称加密。非对称加密虽然两个密钥在数学上相关，但如果知道了其中一个，
+                    并不能凭此计算出另外一个。因此其中一个可以公开，称为公钥，可任意对外发布；不公开的密钥为私钥，必须由用户
+                    自行秘密保管，绝不能通过任何途径向任何人提供。
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    公钥可以用来加密信息和验证签名；私钥用来解密信息和进行签名。加密信息的密钥是不能解密信息的。
+                  </p>
+                </li>
+              </ul>
+            </ol>
+
+            <li>
+              <p>
+                <h4>（三）、对称加密与非对称加密的区别</h4>
+              </p>
+            </li>
+            <ul type="disc" style="padding-left:40px;">
+              <li>
+                <p>
+                  对称加密算法（Data Encryption Algorithm，DEA），也称为私钥加密算法。是加密和解密使用相同密钥的加密
+                  算法。也称为单密钥算法，传统密钥算法。
+                </p>
+              </li>
+
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>算法类型</th>
+                    <th>特点</th>
+                    <th>优势</th>
+                    <th>缺陷</th>
+                    <th>代表算法</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr>
+                    <td>对称加密</td>
+                    <td>加解密密钥相同或可推算</td>
+                    <td>计算效率高，加密强度高</td>
+                    <td>需要提前共享密钥，易泄露</td>
+                    <td>DES、3DES、AES、IDEA</td>
+                  </tr>
+                  <tr>
+                    <td>非对称加密</td>
+                    <td>加解密密钥不相关</td>
+                    <td>无需提前共享密钥</td>
+                    <td>计算效率低，中间人攻击可能性低</td>
+                    <td>RSA、EIGamal、椭圆曲线系列算法</td>
+
+                  </tr>
+                </tbody>
+              </table>
+
+            </ul>
+
+            <li>
+              <p>
+                <h4>（四）、RSA原理</h4>
+              </p>
+            </li>
+
+            <ol style="padding-left:40px;">
+              <li>
+                <p>
+                  RSA算法基于一个十分简单的数论事实：
+                </p>
+              </li>
+              <ul type="disc" style="padding-left:40px;">
+                <li>
+                  <p>
+                    将两个大素数相乘十分容易
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    想要对其乘积进行因式分解极其困难，因此可以将乘积公开作为加密密钥。
+                  </p>
+                </li>
+              </ul>
+
+              <li>
+                <p>
+                  密钥对的生成步骤
+                </p>
+              </li>
+
+              <ol style="padding-left:40px;">
+                <li>
+                  <p>
+                    随机选择两个不相等的质数p和q
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    计算p和q的乘积N
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    计算p-1和q-1的乘积q(N)
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    随机选个整数e，e与m要互质，且0< e <  q(N)
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    计算e的模反元素d
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    公钥是（N，e），私钥是（N，d）
+                  </p>
+                </li>
+
+
+              </ol>
+
+              <li>
+                <p>
+                  加解密步骤
+                </p>
+              </li>
+              <ol style="padding-left:40px;">
+                <li>
+                  <p>
+                    假设一个明文数m（0 <= m < N)
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    对明文m加密成密文c： a.c = m^e mod N
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    对密文c解密成明文m：a.m = c^d mod N
+                  </p>
+                </li>
+              </ol>
+
+
+
+              <li>
+                <p>
+                  举例说明
+                </p>
+              </li>
+              <ol style="padding-left:40px;">
+                <li>
+                  <p>
+                    p = 11，q = 3
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    N = pq = 33
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    z(N) = (p-1)(q-1) = 20
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    选择20的互质数e = 3
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    计算满足 ed = 1 mod 20 的d，也就是模反元素d = 7
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    公钥为（33，3），私钥为（33，7）
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    假如明文 m = 8，（0 < 8 < 33)
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    密文: c = m^e mod N = 8^3 mod 33 = 512 mod 33 = 17 mod 33, 得到 c = 17
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    明文： m = c^d mod N = 17^7 mod 33 = 8 mod 33，得到 m = 8
+                  </p>
+                </li>
+
+
+              </ol>
+            </ol>
+
+          </ul>
+
+       	</div>
+
+
+
+
+       	<div class="tab-pane fade" id="digest">
+          <ul class="list-unstyled" style="font-size: 18px; padding-left:40px;line-height:30px;">
+            <li>
+              <p>
+                <h4>（一）、数字签名的概念</h4>
+              </p>
+            </li>
+
+            <ol style="padding-left:40px;">
+              <li>
+                <p>
+                  所谓数字签名（Digital Signature），又称公开密钥数字签名、电子签章
+                </p>
+              </li>
+              <ul style="padding-left:40px;">
+                <li>
+                  <p>
+                    是一种类似写在纸上的普通物理签名，但是使用了公钥加密领域的技术实现，用于鉴别信息的方法。
+                    一套数字签名通常定义两种互补的运算，一个用于签名，另一个用于验证。
+                  </p>
+                </li>
+              </ul>
+              <li>
+                <p>
+                  数字签名如何工作
+                </p>
+              </li>
+              <ul style="padding-left:40px;">
+                <li>
+                  <p>
+                    数字签名由两部分组成：第一部分是使用私钥（签名密钥）从消息（交易）创建签名的算法；
+                    第二部分是通过使用公钥（验证密钥）对消息和签名进行验证。
+                  </p>
+                </li>
+              </ul>
+
+              <div style="text-align: center;">
+                <img src="./img/degist.png" alt="hash_encrypt" style="margin: 0 auto; width:600px;">
+              </div>
+
+
+            </ol>
+
+            <li>
+              <p>
+                <h4>（二）、数字签名应该满足的要求</h4>
+              </p>
+            </li>
+            <ol style="padding-left:40px;">
+              <li>
+                <p>
+                  签名的不可伪造性；
+                </p>
+              </li>
+              <li>
+                <p>
+                  签名的不可抵赖性；
+                </p>
+              </li>
+              <li>
+                <p>
+                  签名的可信性，签名的识别和应用相对容易，任何人都可以验证签名的有效性；
+                </p>
+              </li>
+              <li>
+                <p>
+                  签名是不可复制的，签名与原文是不可分割的整体；
+                </p>
+              </li>
+              <li>
+                <p>
+                  签名消息不可篡改，因为任意比特数据被篡改，其签名会随之改变，那么任何人可以验证从而拒绝接收此签名；
+                </p>
+              </li>
+
+            </ol>
+
+            <li>
+              <p>
+                <h4>（三）、比特币系统中的数字签名</h4>
+              </p>
+            </li>
+            <ol type="disc" style="padding-left:40px;">
+              <li>
+                <p>
+                  只有转账人才能生成的一段防伪造的字符串，通过验证该字符串，一方面证明该交易是转出方本人发起的，
+                  另一方面证明交易信息在传输过程中没有被更改。
+                </p>
+              </li>
+              <li>
+                <p>
+                  数字签名由：数字摘要和非对称加密技术组成。
+                </p>
+              </li>
+
+              <ul type="disc" style="padding-left:40px;">
+                <li>
+                  <p>
+                    数字摘要把交易信息hash成固定长度的字符串。
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    再用私钥对hash后的交易信息进行加密形成数字签名。
+                  </p>
+                </li>
+            </ul>
+
+
+              <li>
+                <p>
+                  交易中，需要将完整的交易信息和数字签名一起广播给矿工。
+                </p>
+              </li>
+
+
+              <ul type="disc" style="padding-left:40px;">
+                <li>
+                  <p>
+                    矿工节点用转账人公钥对签名进行验证，验证成功说明该交易确实是转账人发起的；
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    矿工节点将交易信息进行hash后与签名中的交易信息摘要进行比对，如果一致，则说明交易信息
+                    在传输过程中没有被篡改。
+                  </p>
+                </li>
+
+                <div style="text-align: center;">
+                  <img src="./img/degist_2.png" alt="hash_encrypt" style="margin: 0 auto; ">
+                </div>
+
+            </ul>
+
+
+            </ol>
+
+          </ul>
+       	</div>
+
+
+
+       	<div class="tab-pane fade" id="base64">
+          <ul class="list-unstyled" style="font-size: 18px; padding-left:40px;line-height:30px;">
+            <li>
+              <p>
+                <h4>（一）、Base64</h4>
+              </p>
+            </li>
+
+            <ol style="padding-left:40px;">
+              <li>
+                <p>
+                  Base64就是一种基于64个可打印字符来表示二进制数据的方法
+                </p>
+              </li>
+              <ul style="padding-left:40px;">
+                <li>
+                  <p>
+                    Base64使用了26个小写字母、26个大写字母、10个数字以及两个符号（“+”和“／”），用于在电子邮件
+                    这样的基于文本的媒介中传输二进制数据。
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Base64通常用于编码邮件中的附件。
+                  </p>
+                </li>
+              </ul>
+              <li>
+                <p>
+                  Base64字符集：ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/
+                </p>
+              </li>
+              <div style="text-align: center;">
+                <img src="./img/base64.png" alt="hash_encrypt" style="margin: 0 auto; ">
+              </div>
+              <li>
+                <p>
+                  Base64的步骤
+                </p>
+              </li>
+
+              <ol style="padding-left:40px;">
+                <li>
+                  <p>
+                    将每个字符转成ASCII编码（10进制）。
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    将10进制编码转成2进制编码。
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    将2进制比阿妹按照6位一组平分。
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    将6位一组的2进制数高位补0，然后转成10进制数。
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    将10进制数作为索引，从Base64编码表中查找字符。
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    每3个字符的文本将编码位4个字符长度（3*8 = 4*6）。
+                  </p>
+                </li>
+
+                <ul type="disc" style="padding-left:40px;">
+                  <li>
+                    <p>
+                      若文本为3个字符，则正好编码为4个字符长度；
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      若文本为2个字符，则编码为3个字符，由于不足4个字符，则在尾部用一个“=”补齐；
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      若文本为1个字符，则编码为2个字符，由于不足4个字符，则在尾部用两个“=”补齐。
+                    </p>
+                  </li>
+                </ul>
+                <div style="text-align: center;">
+                  <img src="./img/degist_3.png" alt="hash_encrypt" style="margin: 0 auto;">
+                </div>
+
+              </ol>
+
+            </ol>
+
+            <li>
+              <p>
+                <h4>（二）、Base58</h4>
+              </p>
+            </li>
+            <ol style="padding-left:40px;">
+              <li>
+                <p>
+                  Base58是一种基于文本的二进制编码格式，用在比特币和其它加密货币中。这种编码格式不仅实现了数据压缩，
+                  保持了易读性，还具有错误诊断功能。
+                </p>
+              </li>
+              <li>
+                <p>
+                  Base58是Base64编码格式的子集，同样使用大小写字母和10个数字，但舍弃了一些容易错读和在特定字体中容易
+                  混淆的字符。
+                </p>
+              </li>
+
+              <ul type="disc" style="padding-left:40px;">
+                <li>
+                  <p>
+                    Base58不含Base64中的0（数字0）、O（大写字母o）、l（小写字母L）、I（大写字母i），以及“+”和 “-”两个
+                    字符。目的就是去除容易混淆的字符。
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    简而言之，Base58就是由不包括（0，O，l，I）的大小写字母和数字组成。
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    比特币的Base58字母表：123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz
+                  </p>
+                </li>
+              </ul>
+
+            </ol>
+
+            <li>
+              <p>
+                <h4>（三）、Base58Check</h4>
+              </p>
+            </li>
+            <ol type="disc" style="padding-left:40px;">
+              <li>
+                <p>
+                  Base58Check是一种常用在比特币中的Base58编码格式，增加了错误较验码来检查数据在转录中出现的错误。
+                </p>
+              </li>
+              <ul type="disc" style="padding-left:40px;">
+                <li>
+                  <p>
+                    校验码长4个字节，添加到需要编码的数据后面。
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    校验码是从需要编码的数据的哈希值中得到的，所以可以用来检测并避免转录和输入中产生的错误。
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    使用Base58Check编码格式时，编码软件会计算原始数据的校验码，并和结果数据中自带的校验码进行对比。二者不匹配
+                    则表明有错误产生，那么这个Base58Check格式的数据就是无效的。
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    例如，一个错误的比特币地址就不会被钱包认为是有效的地址，否则这种错误就会造成资金的丢失。
+                  </p>
+                </li>
+
+          </ul>
+
+
+              <li>
+                <p>
+                  为了使用Base58Check编码格式对数据（数字）进行编码，首先我们要对数据添加一个称作“版本字节”的前缀，
+                  这个前缀用来明确需要编码的数据类型。
+                </p>
+              </li>
+
+              <ul type="disc" style="padding-left:40px;">
+                <li>
+                  <p>
+                    例如，比特币地址的前缀是0（16进制是0x00），二对私钥编码时前缀是128（16进制是0x80）。
+                  </p>
+                </li>
+            </ul>
+
+
+            </ol>
+
+          </ul>
+
+       	</div>
+       </div>
+
     </div>
 
+    <!-- <a href="#top" class="topHome"><i class="fa fa-chevron-up fa-2x"></i></a> -->
 
   <script src="js/jquery-3.3.1.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
+  <script src="js/pdfobject.min.js"></script>
+
+  <script type="text/javascript">
+
+    var success = new PDFObject({ url: "./img/contentbc.pdf" ,pdfOpenParams: { scrollbars: '0', toolbar: '0', statusbar: '0'}}).embed("pdf1");
+
+  </script>
 
 
   </body>
